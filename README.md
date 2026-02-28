@@ -1,5 +1,7 @@
 # 바벨의 규장각
 
+<https://kyu.meliplug.info>
+
 Korean version of Library of Babel
 
 ## Reference
