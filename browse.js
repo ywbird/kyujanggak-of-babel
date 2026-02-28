@@ -18,7 +18,6 @@ const link = document.getElementById("link");
 
 let step = 0;
 
-buildingInput.value = "null";
 roomSubInput1.value = "null";
 roomSubInput2.value = "null";
 roomSubInput3.value = "null";
