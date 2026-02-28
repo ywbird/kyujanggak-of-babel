@@ -1,0 +1,44 @@
+html, body {
+  margin: 0;
+  height: 100%;
+  position: relative;
+}
+
+.container {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  display: grid;
+  place-items: center;
+}
+
+#textbox {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 2px solid red;
+  padding-block: 8px;
+  width: fit-content;
+}
+
+.line {
+  display: flex;
+  height: 40px;
+  border-block: 2px solid red;
+  /* padding-inline: 0.5rem; */
+}
+
+.char {
+  display: flex;
+  height: 40px;
+  width: 40px;
+  place-content: center;
+  place-items: center;
+  font-size: 2rem;
+
+  border-right: 2px solid red;
+
+  &:last-child {
+    border-right: 0;
+  }
+}

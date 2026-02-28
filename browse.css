@@ -1,0 +1,7 @@
+.hidden {
+  display: none;
+}
+
+#room-digits {
+  display: inline-block;
+}
