@@ -14,5 +14,5 @@ searchBtn.addEventListener("click", ()=>{
   let [building, room, wall, shelf, book, page] = coordinate.split(":");
 
   link.innerText = `${building.slice(0, 20)}...:${room}:${wall}:${shelf}:${book}:${page}`;
-  link.href = `/view.html?c=${coordinate}`
+  link.href = `view.html?c=${coordinate}`
 });

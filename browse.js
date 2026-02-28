@@ -70,7 +70,7 @@ bookInput.addEventListener("change", () => {
   const coordinate = `${buildingInput.value}:${roomSubInput1.value}${roomSubInput2.value}${roomSubInput3.value}:${wallInput.value}:${shelfInput.value}:${bookInput.value}:0`;
 
   link.innerText = `${buildingInput.value.slice(0, 20)}${buildingInput.value.length > 20 ? "..." : ""}:${roomSubInput1.value}${roomSubInput2.value}${roomSubInput3.value}:${wallInput.value}:${shelfInput.value}:${bookInput.value}:0`;
-  link.href = `/view.html?c=${coordinate}`
+  link.href = `view.html?c=${coordinate}`
 });
 
 function syncStep() {
