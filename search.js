@@ -1,8 +1,8 @@
-const textarea = document.getElementById("textarea");
+const searchInput = document.getElementById("textarea");
 const searchBtn = document.getElementById("search");
 const link = document.getElementById("link");
 
-textarea.addEventListener("keydown", (e)=>{
+searchInput.addEventListener("keydown", (e)=>{
   if (e.key === "Enter") {
     e.preventDefault();
     searchBtn.click();
@@ -10,9 +10,15 @@ textarea.addEventListener("keydown", (e)=>{
 });
 
 searchBtn.addEventListener("click", ()=>{
-  const coordinate = convertB2Coordinate(textarea.value.padEnd(200, " "));
-  let [building, room, wall, shelf, book, page] = coordinate.split(":");
+  const match = searchInput.value.match(/^[가-힣,\.!\? ]+$/g);
 
-  link.innerText = `${building.slice(0, 20)}...:${room}:${wall}:${shelf}:${book}:${page}`;
-  link.href = `view.html?c=${coordinate}`
+  if (match !== null) {
+    const coordinate = convertB2Coordinate(searchInput.value.padEnd(200, " "));
+
+    link.innerText = convertCoordinate2Title(coordinate);
+    link.href = `view.html?c=${coordinate}`
+  } else {
+    link.innerText = "올바르지 않은 내용입니다.";
+    link.href = ``
+  }
 });

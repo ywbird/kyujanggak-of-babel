@@ -1,15 +1,31 @@
 html, body {
   margin: 0;
   height: 100%;
-  position: relative;
 }
 
-.container {
-  position: absolute;
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  margin-block: 2rem;
+}
+
+main {
   inset: 0;
   margin: auto;
   display: grid;
   place-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 }
 
 #textbox {
@@ -41,4 +57,25 @@ html, body {
   &:last-child {
     border-right: 0;
   }
+}
+
+#pagination {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+#page-input {
+  width: 50px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
 }

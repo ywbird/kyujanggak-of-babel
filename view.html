@@ -5,14 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>열람 - 바벨의 규장각</title>
   <link rel="stylesheet" href="view.css">
+  <link rel="stylesheet" href="global.css">
 </head>
 <body>
   <main>
     <div class="container">
-      <h1 id="title"></h1>
+      <h1 id="title" align="center"></h1>
       <div id="textbox"></div>
+      <div id="pagination">
+        <span>페이지: </span>
+        <button id="prev-page">&lt;</button>
+        <span><input type="number" name="" id="page-input">
+        <span>/1000</span></span>
+        <button id="next-page">&gt;</button>
+        <button id="random">무작위</button>
+      </div>
+      <div><span>현재 책의 좌표: </span><a href="" id="coordinate"></a></div>
     </div>
   </main>
+  <footer>
+    <span id="homepage"><a href="./">대문으로</a></span>
+  </footer>
 
   <script src="utils.js"></script>
   <script src="view.js"></script>

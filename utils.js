@@ -1,4 +1,4 @@
-const ROOM_BASE = 1000n;
+// const ROOM_BASE = 1000n;
 const WALL_BASE = 8n;
 const SHELF_BASE = 4n;
 const BOOK_BASE = 32n;
@@ -6,7 +6,10 @@ const PAGE_BASE = 1000n;
 
 const MAX_BIT_SIZE = 2690n;
 
-const MAX_LIMIT = 11177n ** 200n;
+const BASE_A = 11234n;
+const BASE_B = 11177n;
+
+const MAX_LIMIT = BASE_B ** 200n;
 
 const ENC_KEYS = [
   48193n, 17509n, 94421n, 21577n, 16649n, 17827n, 89659n, 93427n,
@@ -15,15 +18,30 @@ const ENC_KEYS = [
   59077n, 17627n, 34703n, 16607n, 85297n, 19507n, 56099n, 49451n,
 ];
 
-function hash1(R, key) {
+function hash1(R, key, halfBits) {
   let h = R ^ key;
   
-  h ^= h >> 16n;
-  h *= 0x85ebca6bn;
-  h ^= h >> 13n;
-  h *= 0xc2b2ae35n;
-  h ^= h >> 16n;
-  
+  // 1. 상위 비트를 하위로 확 끌어내리기 (공간의 1/2, 1/4, 1/8 비율로 쪼개며 섞음)
+  // 1500비트라면 750칸, 375칸, 187칸씩 큼직하게 비트를 이동시키며 충돌시킵니다.
+  h ^= h >> (halfBits / 2n);
+  h ^= h >> (halfBits / 4n);
+  h ^= h >> (halfBits / 8n);
+
+  // 2. 하위 비트를 상위로 쭉 밀어 올리는 거대한 곱셈
+  // BigInt의 특성을 살려 아주 긴 소수(Magic Prime)를 곱해 올림수(Carry)를 연쇄 폭발시킵니다.
+  h *= 0x85ebca6b98fc78d53142ab452143n; 
+
+  // 3. 다시 한번 중간 크기로 썰어서 섞기
+  h ^= h >> (halfBits / 3n);
+  h ^= h >> (halfBits / 5n);
+
+  // 4. 2차 폭발
+  h *= 0xc2b2ae354d5886ac87515aab892bn;
+
+  // 5. 마무리 잔물결 섞기
+  h ^= h >> (halfBits / 16n);
+  h ^= h >> 16n; 
+
   return h;
 }
 
@@ -38,40 +56,42 @@ function convertB2Coordinate(input) {
   num /= SHELF_BASE;
   const wall = num % WALL_BASE;
   num /= WALL_BASE;
-  const room = num % ROOM_BASE;
-  num /= ROOM_BASE;
+  // const room = num % ROOM_BASE;
+  // num /= ROOM_BASE;
 
-  return `${convertI2A(num)}:${room}:${wall}:${shelf}:${book}:${page}`;
+  return `${convertI2A(num)}-${wall+1n}-${shelf+1n}-${book+1n}-${page+1n}`;
 }
 
 function convertCoordinate2B(input) {
-  let [building, room, wall, shelf, book, page] = input.split(":");
+  let [room, wall, shelf, book, page] = input.split("-");
 
-  let num = convertA2I(building);
-  num *= ROOM_BASE;
-  num += BigInt(room);
+  let num = convertA2I(room);
+  // num *= ROOM_BASE;
+  // num += BigInt(room);
   num *= WALL_BASE;
-  num += BigInt(wall);
+  num += BigInt(wall)-1n;
   num *= SHELF_BASE;
-  num += BigInt(shelf);
+  num += BigInt(shelf)-1n;
   num *= BOOK_BASE;
-  num += BigInt(book);
+  num += BigInt(book)-1n;
   num *= PAGE_BASE;
-  num += BigInt(page);
+  num += BigInt(page)-1n;
 
-  while (num >= MAX_LIMIT) {
-    num = feistelCipher(num, hash1, ENC_KEYS, MAX_BIT_SIZE);
-  }
+  let cipherNum = num;
+  
+  do {
+    cipherNum = feistelCipher(cipherNum, hash1, ENC_KEYS.toReversed(), MAX_BIT_SIZE);
+  } while (cipherNum >= MAX_LIMIT);
 
-  return convertI2B(feistelCipher(num, hash1, ENC_KEYS.toReversed(), MAX_BIT_SIZE)).padStart(200, " ");
+  return convertI2B(cipherNum).padStart(200, " ");
 }
 
 function convertCoordinate2Title(input) {
-  let [building, room, wall, shelf, book, page] = input.split(":");
+  let [room, wall, shelf, book, page] = input.split("-");
 
-  let num = convertA2I(building);
-  num *= ROOM_BASE;
-  num += BigInt(room);
+  let num = convertA2I(room);
+  // num *= ROOM_BASE;
+  // num += BigInt(room);
   num *= WALL_BASE;
   num += BigInt(wall);
   num *= SHELF_BASE;
@@ -92,7 +112,7 @@ function feistelCipher(input, func, keys, bitSize =  64n) {
   let L = input / half;
 
   for (let i = 0; i < keys.length; i++) {
-    const res = func(R, keys[i]) & mask;
+    const res = func(R, keys[i], bitSize/2n) & mask;
     const tmpL = R;
     R = L ^ res;
     L = tmpL;

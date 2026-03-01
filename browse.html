@@ -3,23 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>탐색 - 바벨의 규장각</title>
+  <title>열람 - 바벨의 규장각</title>
   <link rel="stylesheet" href="browse.css">
+  <link rel="stylesheet" href="global.css">
 </head>
 <body>
   <main>
-    <h1>탐색</h1>
+    <h1>열람</h1>
     <div class="container">
-      <section id="building">
-        <span>건물</span>
-        <textarea name="" id="building-input" cols="30" rows="3"></textarea>
-      </section>
-      <section id="room-section" class="hidden">
+      <section id="room-section">
         <span>방</span>
-        <div id="room-digits">
-          <select name="room-sub-1-input" id="room-sub-1-input">
+        <textarea name="" id="room-input" cols="30" rows="3"></textarea>
+      </section>
+      <section id="info-section">
+        <p align="center">
+        이 도서관의 각 방에는 8개의 책장이 있고, 책장 당 4개의 선반이 있으며, 선반 마다 32권의 책이 꽂혀 있습니다.
+        <br>
+        <br>
+        각 방의 식별 문자열은 최대 200자의 한글, 알파벳 대문자/소문자 및 숫자로 구성됩니다.
+        </p>
+      </section>
+      <div id="wall-self-group">
+        <section id="wall-section" class="hidden">
+          <span>벽</span>
+          <select name="wall-input" id="wall-input">
             <option value="null">-</option>
-            <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -28,66 +36,19 @@
             <option value="6">6</option>
             <option value="7">7</option>
             <option value="8">8</option>
-            <option value="9">9</option>
           </select>
-          <select name="room-sub-2-input" id="room-sub-2-input">
+        </section>
+        <section id="shelf-section" class="hidden">
+          <span>책장</span>
+          <select name="shelf-input" id="shelf-input">
             <option value="null">-</option>
-            <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
           </select>
-          <select name="room-sub-3-input" id="room-sub-3-input">
-            <option value="null">-</option>
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-          </select>
-        </div>
-        <section id="room-sub-1">
         </section>
-        <section id="room-sub-2">
-        </section>
-        <section id="room-sub-3">
-        </section>
-      </section>
-      <section id="wall-section" class="hidden">
-        <span>벽</span>
-        <select name="wall-input" id="wall-input">
-          <option value="null">-</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-        </select>
-      </section>
-      <section id="shelf-section" class="hidden">
-        <span>책장</span>
-        <select name="shelf-input" id="shelf-input">
-          <option value="null">-</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-        </select>
-      </section>
+      </div>
       <section id="book-section" class="hidden">
         <span>책</span>
         <select name="book-input" id="book-input">
@@ -127,9 +88,14 @@
         </select>
       </section>
 
-      <a href="" id="link"></a>
+      <section id="result-section">
+        <a href="" id="link" align="center"></a>
+      </section>
     </div>
   </main>
+  <footer>
+    <span id="homepage"><a href="./">대문으로</a></span>
+  </footer>
 
   <script src="utils.js"></script>
   <script src="browse.js"></script>
