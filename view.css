@@ -49,10 +49,9 @@ main {
 }
 
 .char {
-  display: flex;
+  display: grid;
   height: 40px;
   width: 40px;
-  place-content: center;
   place-items: center;
   font-size: 2rem;
 
@@ -67,10 +66,17 @@ main {
   display: flex;
   justify-content: center;
   gap: 1rem;
+  font-size: 1em;
 }
 
 #page-input {
-  width: 50px;
+  width: 4em;
+  font-size: 1em;
+}
+
+#coordinate-wrap {
+  display: flex;
+  gap: 0.5rem;
 }
 
 input::-webkit-outer-spin-button,

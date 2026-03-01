@@ -5,6 +5,7 @@ const prevPageLink = document.getElementById("prev-page");
 const nextPageLink = document.getElementById("next-page");
 const randomPageBtn = document.getElementById("random");
 const coordinateEl = document.getElementById("coordinate");
+const copyBtn = document.getElementById("copy");
 
 let init = true;
 
@@ -93,4 +94,7 @@ function navigate(coordinate) {
 
   coordinateEl.innerText = `${room.length > 20 ? room.slice(0,20)+"..." : room}-${wall}-${shelf}-${book}-${page}`;
   coordinateEl.href = `view.html?c=${coordinate}`;
+
+  copyBtn.onclick = ()=>navigator.clipboard.writeText(coordinate);
 }
+
