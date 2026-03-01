@@ -15,6 +15,10 @@ footer {
   margin-block: 2rem;
 }
 
+h1 {
+  font-size: 1.4em
+}
+
 main {
   inset: 0;
   margin: auto;
