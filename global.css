@@ -1,7 +1,6 @@
-@import url('//fonts.googleapis.com/earlyaccess/nanummyeongjo.css');
-
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
 
 body {
-  font-family: 'NanumMyeongjo';
+  font-family: 'Nanum Myeongjo';
   font-size: 1.2em;
 }
