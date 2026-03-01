@@ -20,7 +20,19 @@
         <button id="next-page">&gt;</button>
         <button id="random">무작위</button>
       </div>
-      <div id="coordinate-wrap"><span>현재 책의 좌표: </span><a href="" id="coordinate"></a><button id="copy">복사</button></div>
+      <div id="coordinate-wrap">
+        <span>현재 책의 좌표: </span>
+        <a href="" id="coordinate"></a>
+        <div>
+          <button id="copy">복사</button>
+          <select name="copy-opt" id="copy-opt">
+            <option value="normal">-</option>
+            <option value="url">URL</option>
+            <option value="markdown">md</option>
+            <option value="html">html</option>
+          </select>
+        </div>
+      </div>
     </div>
   </main>
   <footer>

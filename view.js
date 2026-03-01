@@ -6,6 +6,7 @@ const nextPageLink = document.getElementById("next-page");
 const randomPageBtn = document.getElementById("random");
 const coordinateEl = document.getElementById("coordinate");
 const copyBtn = document.getElementById("copy");
+const copyOpt = document.getElementById("copy-opt");
 
 let init = true;
 
@@ -95,6 +96,12 @@ function navigate(coordinate) {
   coordinateEl.innerText = `${room.length > 20 ? room.slice(0,20)+"..." : room}-${wall}-${shelf}-${book}-${page}`;
   coordinateEl.href = `view.html?c=${coordinate}`;
 
-  copyBtn.onclick = ()=>navigator.clipboard.writeText(coordinate);
+  copyBtn.onclick = 
+    ()=>navigator.clipboard.writeText(
+      copyOpt.value === "normal" ? coordinate :
+      copyOpt.value === "url" ? `${window.location.origin}/view.html?c=${coordinate}` :
+      copyOpt.value === "markdown" ? `[${convertCoordinate2Title(coordinate)}](${window.location.origin}/view.html?c=${coordinate})` :
+      copyOpt.value === "html" ? `<a href="${window.location.origin}/view.html?c=${coordinate}">${convertCoordinate2Title(coordinate)}</a>` : coordinate
+    );
 }
 
