@@ -9,7 +9,10 @@ const shelfSection = document.getElementById("shelf-section");
 const shelfInput = document.getElementById("shelf-input");
 
 const bookSection = document.getElementById("book-section");
-const bookInput = document.getElementById("book-input");
+// const bookInput = document.getElementById("book-input");
+const bookList = document.getElementById("book-list");
+
+const bookListItems = Array.from({length: 32}, (_,a)=>a+1).map(a=>document.getElementById(`book-${a}`))
 
 const link = document.getElementById("link");
 
@@ -17,7 +20,7 @@ let step = 0;
 
 wallInput.value = "null";
 shelfInput.value = "null";
-bookInput.value = "null";
+// bookInput.value = "null";
 
 roomInput.addEventListener("keydown", (e)=>{
   if (e.key === "Enter") {
@@ -55,26 +58,30 @@ shelfInput.addEventListener("change", () => {
   syncCoordinate();
 });
 
-bookInput.addEventListener("change", () => {
-  if (bookInput.value === "null") return;
-
-  syncCoordinate();
-});
+// bookInput.addEventListener("change", () => {
+//   if (bookInput.value === "null") return;
+//
+//   syncCoordinate();
+// });
 
 function syncCoordinate() {
   if (wallInput.value === "null") return;
   if (shelfInput.value === "null") return;
-  if (bookInput.value === "null") return;
+  // if (bookInput.value === "null") return;
 
   const match = roomInput.value.match(/^[0-9A-Za-z가-힣]+$/g);
 
   if (match === null) return;
 
-  const coordinate = `${roomInput.value}-${wallInput.value}-${shelfInput.value}-${bookInput.value}-1`;
+  bookList.innerHtml = ``;
 
-  // link.innerText = `${roomInput.value.slice(0, 20)}${roomInput.value.length > 20 ? "..." : ""}:${wallInput.value}:${shelfInput.value}:${bookInput.value}:0`;
-  link.innerText = convertCoordinate2Title(coordinate);
-  link.href = `view.html?c=${coordinate}`
+  for (let i = 1; i <= 32; i++) {
+    const coordinate = `${roomInput.value}-${wallInput.value}-${shelfInput.value}-${i}-1`;
+
+    // link.innerText = `${roomInput.value.slice(0, 20)}${roomInput.value.length > 20 ? "..." : ""}:${wallInput.value}:${shelfInput.value}:${bookInput.value}:0`;
+    bookListItems[i-1].innerText = convertCoordinate2Title(coordinate);
+    bookListItems[i-1].href = `view.html?c=${coordinate}`
+  }
 }
 
 function syncStep() {
