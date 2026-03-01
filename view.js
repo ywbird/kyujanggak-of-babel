@@ -94,7 +94,7 @@ function navigate(coordinate) {
   }
 
   coordinateEl.innerText = `${room.length > 20 ? room.slice(0,20)+"..." : room}-${wall}-${shelf}-${book}-${page}`;
-  coordinateEl.href = `view.html?c=${coordinate}`;
+  coordinateEl.href = `${window.location.origin}/view.html?c=${coordinate}`;
 
   copyBtn.onclick = 
     ()=>navigator.clipboard.writeText(
