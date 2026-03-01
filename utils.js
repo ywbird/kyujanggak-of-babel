@@ -99,7 +99,7 @@ function convertCoordinate2Title(input) {
   num *= BOOK_BASE;
   num += BigInt(book);
 
-  return convertI2B(feistelCipher(num, hash1, ENC_KEYS.toReversed(), MAX_BIT_SIZE) % (11177n**25n)).padStart(200, " ");
+  return convertI2B(feistelCipher(num, hash1, ENC_KEYS.toReversed(), MAX_BIT_SIZE) % (11177n**25n));
 }
 
 function feistelCipher(input, func, keys, bitSize =  64n) {
