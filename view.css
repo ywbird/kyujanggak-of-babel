@@ -39,6 +39,7 @@ main {
   border: 2px solid red;
   padding-block: 8px;
   width: fit-content;
+  background: white;
 }
 
 .line {

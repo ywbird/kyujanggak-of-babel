@@ -3,4 +3,7 @@
 body {
   font-family: 'Nanum Myeongjo';
   font-size: 1.2em;
+
+  background-image: url("bg.webp");
+  background-position: center center;
 }
