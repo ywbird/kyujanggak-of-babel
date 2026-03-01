@@ -3,7 +3,7 @@ const searchBtn = document.getElementById("search");
 const link = document.getElementById("link");
 
 searchInput.addEventListener("keydown", (e)=>{
-  searchInput.value = searchInput.value.replaceAll(/[^가-힣ㄱ-ㅎㅏ-ㅣ,\.!\? ]/g, "");
+  searchInput.value = searchInput.value.replaceAll(/[^가-힣ㄱ-ㅎㅏ-ㅣ,\.!\? ]/g, "").slice(0, 200);
 
   if (e.key === "Enter") {
     e.preventDefault();
@@ -12,7 +12,7 @@ searchInput.addEventListener("keydown", (e)=>{
 });
 
 searchBtn.addEventListener("click", ()=>{
-  searchInput.value = searchInput.value.replaceAll(/[^가-힣ㄱ-ㅎㅏ-ㅣ,\.!\? ]/g, "");
+  searchInput.value = searchInput.value.replaceAll(/[^가-힣ㄱ-ㅎㅏ-ㅣ,\.!\? ]/g, "").slice(0, 200);
   
   const match = searchInput.value.match(/^[가-힣,\.!\? ]+$/g);
 
