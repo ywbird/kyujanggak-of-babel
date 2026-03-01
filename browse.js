@@ -32,6 +32,13 @@ roomInput.addEventListener("keydown", (e)=>{
   syncCoordinate();
 });
 
+roomInput.addEventListener("paste", ()=>{
+  console.log("paste");
+  roomInput.value = roomInput.value.replaceAll(/[^0-9A-Za-z가-힣ㄱ-ㅎㅏ-ㅣ]/g, "")
+
+  syncCoordinate();
+});
+
 wallInput.addEventListener("change", () => {
   if (wallInput.value === "null") return;
 
