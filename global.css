@@ -7,3 +7,7 @@ body {
   background-image: url("bg.webp");
   background-position: center center;
 }
+
+.hidden {
+  display: none;
+}

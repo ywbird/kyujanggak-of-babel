@@ -47,22 +47,13 @@ pageInput.addEventListener("keydown", (e)=>{
 });
 
 function fillText(coordinate) {
-  const text = convertCoordinate2B(coordinate);
+  const text = convertCoordinate2B(coordinate).slice(0,200).padEnd(200, " ");
   textbox.innerHTML = ``;
-  for (let row = 0; row < 10; row++) {
-    const rowEl = document.createElement("div");
-    rowEl.classList.add("line");
-    for (let col = 0; col < 20; col++) {
-      const charEl = document.createElement("span");
-      charEl.classList.add("char");
-      if (text.length > row*20 + col) {
-        charEl.innerText = text[row*20+col];
-      } else {
-        charEl.innerText = " ";
-      }
-      rowEl.appendChild(charEl);
-    }
-    textbox.appendChild(rowEl);
+  for (let i = 0; i < 200; i++) {
+    const charEl = document.createElement("span");
+    charEl.classList.add("char");
+    charEl.textContent = text[i];
+    textbox.appendChild(charEl);
   }
 }
 

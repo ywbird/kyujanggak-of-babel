@@ -27,38 +27,40 @@ main {
 }
 
 .container {
+  padding-inline: 1rem;
   display: flex;
   flex-direction: column;
   gap: 3rem;
 }
 
 #textbox {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  /* display: grid; */
+  /* grid-template-columns: repeat(20, 1fr); */
+  /* row-gap: 8px; */
+  /* width: fit-content; */
+  width: 900px;
   border: 2px solid red;
   padding-block: 8px;
-  width: fit-content;
   background: white;
 }
 
-.line {
-  display: flex;
-  height: 40px;
-  border-block: 2px solid red;
-  /* padding-inline: 0.5rem; */
-}
-
 .char {
-  display: grid;
-  height: 40px;
-  width: 40px;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 45px;
+  width: 45px;
   font-size: 2rem;
+  vertical-align: top; 
+  line-height: 1;
 
+  box-sizing: border-box;
+  margin-bottom: 8px;
+
+  border-block: 2px solid red;
   border-right: 2px solid red;
 
-  &:last-child {
+  &:nth-child(20n) {
     border-right: 0;
   }
 }
