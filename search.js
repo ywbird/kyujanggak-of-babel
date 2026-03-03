@@ -1,7 +1,7 @@
 const searchInput = document.getElementById("textarea");
 const searchBtn = document.getElementById("search");
 const link = document.getElementById("link");
-const resultContaining = document.getElementById("result-containing");
+const resultList = document.getElementById("result-list");
 const resultWrap = document.getElementById("result");
 const moreResultBtn = document.getElementById("more-result");
 const alert = document.getElementById("alert");
@@ -15,6 +15,8 @@ searchInput.addEventListener("keydown", (e)=>{
   }
 });
 
+let resultCoordList = [];
+
 searchBtn.addEventListener("click", ()=>{
   searchInput.value = searchInput.value.replaceAll(/[^가-힣ㄱ-ㅎㅏ-ㅣ,\.!\? ]/g, "").slice(0, 200);
   
@@ -26,7 +28,8 @@ searchBtn.addEventListener("click", ()=>{
     link.innerText = convertCoordinate2Title(coordinate);
     link.href = `view.html?c=${coordinate}`
 
-    resultContaining.textContent = ``;
+    resultList.textContent = ``;
+    resultCoordList = [];
     searchTen();
     resultWrap.classList.remove("hidden");
     alert.innerText = "";
@@ -39,13 +42,21 @@ moreResultBtn.addEventListener("click", searchTen);
 
 function searchTen() {
   for (let i = 0; i < 10; i++) {
-    const coordinate = containingMatch(searchInput.value);
+    let searchTry = 20;
+    let coordinate;
+    do {
+      coordinate = containingMatch(searchInput.value);
+      searchTry--;
+    } while (resultCoordList.includes(coordinate) && searchTry > 0);
+    if (resultCoordList.includes(coordinate)) continue;
+    resultCoordList.push(coordinate);
+
     const el = document.createElement("li");
     const a = document.createElement("a");
     a.innerText = convertCoordinate2Title(coordinate);
     a.href = `view.html?c=${coordinate}`;
     el.appendChild(a);
-    resultContaining.appendChild(el);
+    resultList.appendChild(el);
     }
 }
 
