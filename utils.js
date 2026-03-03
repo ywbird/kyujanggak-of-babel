@@ -9,6 +9,8 @@ const MAX_BIT_SIZE = 2690n;
 const BASE_A = 11234n;
 const BASE_B = 11177n;
 
+const TITLE_LENGTH = 25n;
+
 const MAX_LIMIT = BASE_B ** 200n;
 
 const ENC_KEYS = [
@@ -99,7 +101,7 @@ function convertCoordinate2Title(input) {
   num *= BOOK_BASE;
   num += BigInt(book);
 
-  return convertI2B(feistelCipher(num, hash1, ENC_KEYS.toReversed(), MAX_BIT_SIZE) % (11177n**25n));
+  return convertI2B(feistelCipher(num, hash1, ENC_KEYS.toReversed(), MAX_BIT_SIZE) % (BASE_B**TITLE_LENGTH));
 }
 
 function feistelCipher(input, func, keys, bitSize =  64n) {
