@@ -40,7 +40,7 @@ main {
   /* width: fit-content; */
   width: 900px;
   border: 2px solid red;
-  padding-block: 8px;
+  padding-top: 8px;
   background: white;
 }
 
