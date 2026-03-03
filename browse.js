@@ -26,13 +26,17 @@ roomInput.addEventListener("keydown", (e)=>{
   if (e.key === "Enter") {
     e.preventDefault();
 
-    const match = roomInput.value.match(/^[0-9A-Za-z가-힣]+$/g);
+    if (roomInput.value.match(/^[0-9A-Za-z가-힣]+\-[1-8]\-[1-4]\-[0-9]+\-[0-9]+$/g)) {
+      window.location = `view.html?c=${roomInput.value}`;
+    } else {
+      const match = roomInput.value.match(/^[0-9A-Za-z가-힣]+$/g);
 
-    if (match !== null && step === 0) { step++; syncStep(); }
+      if (match !== null && step === 0) { step++; syncStep(); }
+    }
+  } else {
+    roomInput.value = roomInput.value.replaceAll(/[^0-9A-Za-z가-힣ㄱ-ㅎㅏ-ㅣ]/g, "")
+    syncCoordinate();
   }
-  roomInput.value = roomInput.value.replaceAll(/[^0-9A-Za-z가-힣ㄱ-ㅎㅏ-ㅣ]/g, "")
-
-  syncCoordinate();
 });
 
 roomInput.addEventListener("paste", ()=>{
