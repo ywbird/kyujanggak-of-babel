@@ -20,6 +20,7 @@ const ENC_KEYS = [
   59077n, 17627n, 34703n, 16607n, 85297n, 19507n, 56099n, 49451n,
 ];
 
+// By gemini
 function hash1(R, key, halfBits) {
   let h = R ^ key;
   
